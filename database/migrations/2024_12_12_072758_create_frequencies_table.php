@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('frequencies', function (Blueprint $table) {
             $table->id('frequency_id'); 
-            $table->string('type'); // weekly, monthly, yearly
+            $table->string('frequency'); // weekly, monthly, yearly
             $table->timestamps();
         });
     }

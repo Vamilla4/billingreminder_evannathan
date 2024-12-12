@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('produk');
             $table->decimal('harga', 10, 2);
             $table->date('due_date');
-            $table->unsignedBigInteger('frequency');
+            $table->unsignedBigInteger('frequency_id');
             $table->string('payment_method');
             $table->unsignedBigInteger('user_id');
             $table->text('note')->nullable();
             $table->timestamps();
     
+            
+            //dont forget to comment and uncomment this if you want to migrate
             $table->foreignId('frequency_id')->references('frequency_id')->on('frequencies');
             $table->foreignId('user_id')->references('user_id')->on('users');
         });
