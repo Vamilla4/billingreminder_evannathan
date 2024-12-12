@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->timestamps();
     
-            $table->foreignId('frequency')->references('frequency_id')->on('frequencies');
+            $table->foreignId('frequency_id')->references('frequency_id')->on('frequencies');
             $table->foreignId('user_id')->references('user_id')->on('users');
         });
     }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Frequency extends Model
 {
     use HasFactory;
+    public function subscriptions(){
+    return $this->hasMany(Subscription::class, 'frequency', 'frequency_id');
+    }
+
 }
