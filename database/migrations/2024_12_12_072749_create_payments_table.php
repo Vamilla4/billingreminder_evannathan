@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             //dont forget to comment and uncomment this if you want to migrate
-            $table->foreignId('subscription_id')->references('subscription_id')->on('subscriptions');
+           $table->foreignId('subscription_id')->references('subscription_id')->on('subscriptions');
         });
     }
 
