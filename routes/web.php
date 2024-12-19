@@ -40,3 +40,6 @@ Route::get('/frequency', function () {
     $frequencies = App\Models\Frequency::all(); 
     return view('frequencies.index', compact('frequencies')); 
 });
+
+//please dont touch these, it takes like 10 mins to generate 3000 dummy data
+// and it took me 3 hours to figure that out

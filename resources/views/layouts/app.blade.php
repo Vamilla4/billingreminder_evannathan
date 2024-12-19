@@ -6,14 +6,15 @@
     <title>Billing Reminder</title>
 </head>
 <body>
-    <nav>
-        <ul>
+<nav>
+    <ul>
         <li><a href="{{ url('/user') }}">Users</a></li>
         <li><a href="{{ url('/subscription') }}">Subscriptions</a></li>
         <li><a href="{{ url('/payment') }}">Payments</a></li>
         <li><a href="{{ url('/frequency') }}">Frequencies</a></li>
-        </ul>
-    </nav>
+    </ul>
+</nav>
+
 
     <div class="container">
         @yield('content')
