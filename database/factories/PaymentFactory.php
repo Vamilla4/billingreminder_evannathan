@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Subscription;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>
- */
 class PaymentFactory extends Factory
 {
     protected $model = \App\Models\Payment::class;
@@ -15,8 +13,7 @@ class PaymentFactory extends Factory
     {
         return [
             'payment_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'amount' => $this->faker->randomFloat(2, 10, 500), // Random amount
-            'subscription_id' => \App\Models\Subscription::factory(),
+            'subscription_id' => Subscription::inRandomOrder()->first()->subscription_id ?? Subscription::factory(), // Use an existing subscription
             'payment_method' => $this->faker->randomElement(['Card', 'Transfer', 'PayPal']),
             'proof' => $this->faker->imageUrl(),
         ];

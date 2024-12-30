@@ -22,4 +22,10 @@ public function frequency()
 {
     return $this->belongsTo(Frequency::class, 'frequency_id', 'frequency_id');
 }
+public function getRouteKeyName()
+{
+    return 'subscription_id'; // Use 'subscription_id' as the route key for binding
+}
+
+
 }
