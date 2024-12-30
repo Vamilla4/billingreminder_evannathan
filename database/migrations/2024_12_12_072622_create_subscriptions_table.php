@@ -19,9 +19,7 @@ return new class extends Migration
             $table->decimal('harga', 10, 2);
             $table->date('due_date');
             $table->unsignedBigInteger('frequency_id');
-            $table->string('payment_method');
             $table->unsignedBigInteger('user_id');
-            $table->text('note')->nullable();
             $table->timestamps();
     
             
