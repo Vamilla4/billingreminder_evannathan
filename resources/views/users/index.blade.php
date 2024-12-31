@@ -5,7 +5,7 @@
         <h1>Users</h1>
         
         <!-- Button to Add New User -->
-        <a href="{{ url('/user/create') }}" class="btn btn-primary mb-3">Add New User</a>
+        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add New User</a>
 
         <!-- Users Table -->
         <table class="table table-bordered">
@@ -27,13 +27,13 @@
                         <td>{{ $user->user_id }}</td>
                         <td>
                             <!-- Edit User Button -->
-                            <a href="{{ url('/user/' . $user->id . '/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('users.edit', $user->user_id) }}" class="btn btn-warning btn-sm">Edit</a>
                             
                             <!-- Delete User Button -->
-                            <form action="{{ url('/user/' . $user->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <form action="{{ route('users.destroy', $user->user_id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
                             </form>
 
                             <!-- Open Button to View Subscriptions -->
