@@ -42,15 +42,29 @@ Route::get('/frequency', function () {
     $frequencies = App\Models\Frequency::all(); 
     return view('frequencies.index', compact('frequencies')); 
 });
+//users
+Route::resource('users', UserController::class);
+
 
 Route::get('user/{user_id}/subscriptions', [UserController::class, 'showSubscriptions'])->name('user.subscriptions');
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('users', [UserController::class, 'store'])->name('users.store');
+Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+
+
+//subscriptions
 Route::resource('subscriptions', SubscriptionController::class);
 Route::get('subscriptions/{subscription}/payments', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 
+//payments
 Route::get('payments/create/{subscription}', [PaymentController::class, 'create'])->name('payments.create');
 Route::get('payments/{payment}/edit', [PaymentController::class, 'edit'])->name('payments.edit');
 Route::delete('payments/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
 
 //please dont touch these, it takes like 10 mins to generate 3000 dummy data
 // and it took me 3 hours to figure that out
+// update it took me 6 hours to update the views and reads, as im writing this im stuck trying to figure out how to fix the update for users
