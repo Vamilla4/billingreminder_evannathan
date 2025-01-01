@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.d
 
 //subscriptions
 Route::resource('subscriptions', SubscriptionController::class);
+Route::post('subscriptions', [SubscriptionController::class, 'store'])->name('subscriptions.store');
 Route::get('subscriptions/{subscription}/payments', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 
 //payments
