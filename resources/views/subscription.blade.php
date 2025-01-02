@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>{{ $user->name }}'s Subscriptions</h1>
-    <a href="{{ route('subscriptions.create') }}">Add New Subscription</a> <!-- Link to create a new subscription -->
+    <a href="{{ route('subscriptions.create', $user->user_id) }}">Add New Subscription</a> <!-- Link to create a new subscription -->
     @if ($subscriptions->isEmpty())
         <p>No subscriptions found for this user.</p>
     @else
@@ -24,8 +24,7 @@
                         <td>{{ $subscription->frequency ? $subscription->frequency->frequency : 'N/A' }}</td>
                         <td>{{ $subscription->due_date }}</td>
                         <td>
-                            <!-- Add action buttons (edit, delete, open) here -->
-                            <a href="{{ route('subscriptions.edit', $subscription->subscription_id) }}">Edit</a> | 
+                            <!-- Add action buttons ( delete, open) here -->| 
                             <form action="{{ route('subscriptions.destroy', $subscription->subscription_id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

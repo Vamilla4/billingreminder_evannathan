@@ -16,35 +16,32 @@ class SubscriptionController extends Controller
         return view('subscriptions.index', compact('subscriptions'));
     }
 
-    public function create()
+    public function create($user_id)
     {
         $frequencies = Frequency::all();
-        return view('subscriptions.form', compact('frequencies'));
-    }
+        return view('subscriptions.form', compact('frequencies', 'user_id'));
+    }    
 
-    public function store(Request $request)
+    public function store(Request $request, $user_id)
     {
-        // Validate the request data
         $validated = $request->validate([
             'produk' => 'required|string|max:255',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:0',
             'due_date' => 'required|date',
             'frequency_id' => 'required|exists:frequencies,frequency_id',
         ]);
     
-        // Create a new subscription
-        $subscription = new Subscription();
-        $subscription->produk = $request->produk;
-        $subscription->harga = $request->harga;
-        $subscription->due_date = $request->due_date;
-        $subscription->frequency_id = $request->frequency_id;
-        $subscription->save();
-    
-        // Redirect with a success message or back
-        return redirect()->route('subscriptions.index')->with('success', 'Subscription added successfully!');
+        Subscription::create([
+            'produk' => $validated['produk'],
+            'harga' => $validated['harga'],
+            'due_date' => $validated['due_date'],
+            'frequency_id' => $validated['frequency_id'],
+            'user_id' => $user_id, // Extracted from URL
+        ]);
+        return redirect()->route('users.index')->with('success', 'Subscription added successfully!');
+
     }
     
-
     public function edit(Subscription $subscription)
     {
         $frequencies = Frequency::all();
@@ -72,12 +69,19 @@ class SubscriptionController extends Controller
         return redirect()->route('subscriptions.user', $subscription->user_id);
     }
 
-    public function destroy(Subscription $subscription)
+    public function destroy($subscription_id)
     {
+        // Find the subscription using subscription_id
+        $subscription = Subscription::where('subscription_id', $subscription_id)->firstOrFail();
+    
         // Delete the subscription
         $subscription->delete();
-        return redirect()->route('subscriptions.index');
+    
+        // Redirect back with a success message
+        return redirect('/user')->with('success', 'Subscription deleted successfully!');
     }
+    
+    
 
     public function show(Subscription $subscription)
     {

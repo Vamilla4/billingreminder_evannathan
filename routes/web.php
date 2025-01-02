@@ -59,7 +59,9 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.d
 
 //subscriptions
 Route::resource('subscriptions', SubscriptionController::class);
-Route::post('subscriptions', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+Route::get('/user/{user}/subscriptions/create', [SubscriptionController::class, 'create'])->name('subscriptions.create');
+Route::post('/user/{user}/subscriptions', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+Route::delete('/subscriptions/{subscription}', [SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
 Route::get('subscriptions/{subscription}/payments', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 
 //payments
