@@ -3,7 +3,15 @@
 @section('content')
     <h1>Add New Subscription</h1>
 
-    <form action="{{ route('subscriptions.store') }}" method="POST">
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="color: red;">{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    <form action="{{ route('subscriptions.store', ['user' => $user_id]) }}" method="POST">
         @csrf
         <div>
             <label for="produk">Subscription Name:</label>
@@ -25,7 +33,7 @@
             <select id="frequency_id" name="frequency_id" required>
                 <option value="">Select Frequency</option>
                 @foreach ($frequencies as $frequency)
-                    <option value="{{ $frequency->id }}" {{ old('frequency_id') == $frequency->id ? 'selected' : '' }}>
+                    <option value="{{ $frequency->frequency_id }}" {{ old('frequency_id') == $frequency->frequency_id ? 'selected' : '' }}>
                         {{ $frequency->frequency }}
                     </option>
                 @endforeach
